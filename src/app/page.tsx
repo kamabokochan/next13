@@ -1,5 +1,22 @@
+'use client'
+
 import Image from 'next/image'
+import { useEffect } from 'react'
 import styles from './page.module.css'
+
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('../mocks/browser')
+  worker.start()
+
+  const testFetch = async () => {
+    const response = await fetch(
+      '/test'
+    );
+    const data = await response.json();
+    console.log(data)
+  };
+  testFetch();
+}
 
 export default function Home() {
   return (
