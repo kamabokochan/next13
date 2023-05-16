@@ -1,5 +1,27 @@
+// 'use client'
+
 import Image from 'next/image'
 import styles from './page.module.css'
+
+if (process.env.NODE_ENV === 'development') {
+  // client side
+  // const { worker } = require('../mocks/browser')
+  // worker.start()
+
+  // server side
+  const { server } = require('../mocks/server')
+  // https://mswjs.io/docs/api/setup-worker/start#onunhandledrequest
+  server.listen({ onUnhandledRequest: "bypass" })
+
+  const testFetch = async () => {
+    const response = await fetch(
+      'https://api.backend.dev/user'
+    );
+    const data = await response.json();
+    console.log(data)
+  };
+  testFetch();
+}
 
 export default function Home() {
   return (
