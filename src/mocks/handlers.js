@@ -46,4 +46,10 @@ export const handlers = [
         }),
       )
     }),
+
+    // https://mswjs.io/docs/getting-started/integrate/node
+    // Jest の jsdom のような DOM のような環境がない場合、NodeJS で絶対リクエスト URL を使用する必要があることに注意してください。
+    rest.get('https://api.backend.dev/user', (req, res, ctx) => {
+      return res(ctx.json({ firstName: 'John' }))
+    }),
   ]

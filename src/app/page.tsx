@@ -1,16 +1,21 @@
-'use client'
+// 'use client'
 
 import Image from 'next/image'
-import { useEffect } from 'react'
 import styles from './page.module.css'
 
 if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('../mocks/browser')
-  worker.start()
+  // client side
+  // const { worker } = require('../mocks/browser')
+  // worker.start()
+
+  // server side
+  const { server } = require('../mocks/server')
+  // https://mswjs.io/docs/api/setup-worker/start#onunhandledrequest
+  server.listen({ onUnhandledRequest: "bypass" })
 
   const testFetch = async () => {
     const response = await fetch(
-      '/test'
+      'https://api.backend.dev/user'
     );
     const data = await response.json();
     console.log(data)
